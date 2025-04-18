@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Hospital Management System{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Hospital Management System</h1>
+    <p class="lead">A comprehensive solution for managing hospital operations, patient records, appointments, and more.</p>
+    <hr class="my-4">
+    <p>Login or register to access the system features.</p>
+    <div class="mt-4">
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg mr-2">Login</a>
+        <a href="{{ url_for('register') }}" class="btn btn-secondary btn-lg">Register</a>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">For Patients</h5>
+                <p class="card-text">Book appointments, view medical history, and communicate with doctors.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">For Doctors</h5>
+                <p class="card-text">Manage appointments, update patient records, and access medical histories.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">For Administrators</h5>
+                <p class="card-text">Oversee hospital operations, manage staff, and ensure smooth functioning.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

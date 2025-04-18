@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Patient Dashboard - Hospital Management System{% endblock %}
+
+{% block content %}
+<h2>Patient Dashboard</h2>
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">Patient Information</h5>
+    </div>
+    <div class="card-body">
+        <p><strong>Name:</strong> {{ patient.first_name }} {{ patient.last_name }}</p>
+        <p><strong>Date of Birth:</strong> {{ patient.date_of_birth.strftime('%Y-%m-%d') }}</p>
+        <p><strong>Gender:</strong> {{ patient.gender }}</p>
+        <p><strong>Blood Group:</strong> {{ patient.blood_group }}</p>
+        <p><strong>Contact:</strong> {{ patient.phone }}</p>
+        <p><strong>Email:</strong> {{ patient.email }}</p>
+        <p><strong>Address:</strong> {{ patient.address }}</p>
+    </div>
+</div>
+
+<h3>Upcoming Appointments</h3>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+                <tr>
+                    <td>Dr. {{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</td>
+                    <td>{{ appointment.date.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ appointment.time.strftime('%H:%M') }}</td>
+                    <td>{{ appointment.status }}</td>
+                    <td>
+                        <a href="{{ url_for('view_appointment', appointment_id=appointment.id) }}" class="btn btn-sm btn-primary">View</a>
+                        <a href="{{ url_for('cancel_appointment', appointment_id=appointment.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to cancel this appointment?');">Cancel</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">No appointments scheduled.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-4">
+    <a href="{{ url_for('book_appointment') }}" class="btn btn-primary">Book New Appointment</a>
+</div>
+{% endblock %}

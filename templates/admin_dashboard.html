@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard - Hospital Management System{% endblock %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Doctors</h5>
+                <p class="card-text">Manage doctor profiles and accounts.</p>
+                <a href="{{ url_for('admin_doctors') }}" class="btn btn-primary">View Doctors</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Patients</h5>
+                <p class="card-text">Manage patient profiles and records.</p>
+                <a href="{{ url_for('admin_patients') }}" class="btn btn-primary">View Patients</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Appointments</h5>
+                <p class="card-text">View and manage all appointments.</p>
+                <a href="#" class="btn btn-primary">View Appointments</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

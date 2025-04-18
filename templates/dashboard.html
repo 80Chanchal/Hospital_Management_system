@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Hospital Management System{% endblock %}
+
+{% block content %}
+<h2>Dashboard</h2>
+<div class="alert alert-info">
+    Welcome to your dashboard. Please use the navigation menu to access different features.
+</div>
+
+{% if session.role == 'patient' %}
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Appointment Options</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('book_appointment') }}" class="btn btn-success btn-lg">Book New Appointment</a>
+                    <a href="{{ url_for('patient_appointments') }}" class="btn btn-info">View My Appointments</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% elif session.role == 'doctor' %}
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Doctor Options</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('doctor_appointments') }}" class="btn btn-info btn-lg">View My Appointments</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% elif session.role == 'admin' %}
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Admin Options</h5>
+            </div>
+            <div class="card-body">
+                <p>Admin dashboard options will be added here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

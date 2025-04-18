@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Doctors - Hospital Management System{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Manage Doctors</h2>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addDoctorModal">
+        <i class="fas fa-plus"></i> Add New Doctor
+    </button>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Specialization</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor in doctors %}
+                    <tr>
+                        <td>{{ doctor.id }}</td>
+                        <td>Dr. {{ doctor.first_name }} {{ doctor.last_name }}</td>
+                        <td>{{ doctor.specialization }}</td>
+                        <td>{{ doctor.phone }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editDoctorModal{{ doctor.id }}">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-sm btn-danger confirm-action" data-action="delete" data-id="{{ doctor.id }}">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">No doctors found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Add Doctor Modal -->
+<div class="modal fade" id="addDoctorModal" tabindex="-1" role="dialog" aria-labelledby="addDoctorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDoctorModalLabel">Add New Doctor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ url_for('admin_add_doctor') }}" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="specialization">Specialization</label>
+                        <input type="text" class="form-control" id="specialization" name="specialization" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Doctor Modals -->
+{% for doctor in doctors %}
+<div class="modal fade" id="editDoctorModal{{ doctor.id }}" tabindex="-1" role="dialog" aria-labelledby="editDoctorModalLabel{{ doctor.id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editDoctorModalLabel{{ doctor.id }}">Edit Doctor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ url_for('admin_edit_doctor', doctor_id=doctor.id) }}" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="edit_first_name{{ doctor.id }}">First Name</label>
+                        <input type="text" class="form-control" id="edit_first_name{{ doctor.id }}" name="first_name" value="{{ doctor.first_name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_last_name{{ doctor.id }}">Last Name</label>
+                        <input type="text" class="form-control" id="edit_last_name{{ doctor.id }}" name="last_name" value="{{ doctor.last_name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_specialization{{ doctor.id }}">Specialization</label>
+                        <input type="text" class="form-control" id="edit_specialization{{ doctor.id }}" name="specialization" value="{{ doctor.specialization }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_phone{{ doctor.id }}">Phone</label>
+                        <input type="text" class="form-control" id="edit_phone{{ doctor.id }}" name="phone" value="{{ doctor.phone }}" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

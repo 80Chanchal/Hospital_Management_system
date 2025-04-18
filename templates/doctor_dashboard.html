@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Doctor Dashboard - Hospital Management System{% endblock %}
+
+{% block content %}
+<h2>Doctor Dashboard</h2>
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">Doctor Information</h5>
+    </div>
+    <div class="card-body">
+        <p><strong>Name:</strong> {{ doctor.first_name }} {{ doctor.last_name }}</p>
+        <p><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+        <p><strong>Contact:</strong> {{ doctor.phone }}</p>
+    </div>
+</div>
+
+<h3>Upcoming Appointments</h3>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</td>
+                    <td>{{ appointment.date.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ appointment.time.strftime('%H:%M') }}</td>
+                    <td>{{ appointment.status }}</td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-primary">View</a>
+                        <a href="#" class="btn btn-sm btn-success">Complete</a>
+                        <a href="#" class="btn btn-sm btn-danger">Cancel</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">No appointments scheduled.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
