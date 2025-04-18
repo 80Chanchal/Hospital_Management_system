@@ -25,8 +25,8 @@ A comprehensive web-based Hospital Management System built with Flask and SQLAlc
 
 1. Clone the repository:
    ```
-   git clone https://github.com/80Chanchal/Hospital-Management-System.git
-   cd Hospital-Management-System
+   git clone https://github.com/80Chanchal/Hospital_Management_System.git
+   cd Hospital_Management_System
    ```
 
 2. Install required packages:
@@ -45,6 +45,9 @@ A comprehensive web-based Hospital Management System built with Flask and SQLAlc
    ```
 
 5. Access the application at: `http://localhost:5000`
+
+Once your project is uploaded, you can view it at:
+https://github.com/80Chanchal/Hospital_Management_System
 
 ## Default Credentials
 
